@@ -15,5 +15,5 @@ Hence we obtain the cipher text as "BSEZWUCSJZNE".
 
 Note that the frequency of occurrence of characters in the plaintext is "preserved" in the ciphertext. For instance, the most frequent character in the ciphertext is likely to be the encryption of the plaintext character "e" which is the most frequently occurring charecter in English. For a very brief theory of the mono-alphabetic substitution cipher and its cryptanalysis, click [here](docs/monoalphacipher.pdf)
 
-     	  <img src="images/image2.png/">
+<img src="images/image2.png">
 
