@@ -7,7 +7,168 @@
 <body>
 		<!-- Your code goes here-->
 
+<div class="content" id="experiment-article-section-4-content">
+                            <!--<h2>Breaking the Mono Alphabetic Substitution Cipher</h2>-->
+                           
+                            <p>PART I</p>
+                            <p>Decrypt the following cipher text. A tool to simulate the Mono-Alphabetic Subsitution cipher is provided beneath for your assistance.
+                            </p>
+                            <p>Here is the table of frequencies of English alphabets for your reference:</p>
+                            <div style="text-align: center;">
+                                <table ;="" bgcolor="black" border="0" cellpadding="3" cellspacing="1">
+                                    <tbody>
+                                        <tr>
+                                            <td ;="" bgcolor="white"><b>a</b></td>
+                                            <td ;="" bgcolor="white"><b>b</b></td>
+                                            <td ;="" bgcolor="white"><b>c</b></td>
+                                            <td ;="" bgcolor="white"><b>d</b></td>
+                                            <td ;="" bgcolor="white"><b>e</b></td>
+                                            <td ;="" bgcolor="white"><b>f</b></td>
+                                            <td ;="" bgcolor="white"><b>g</b></td>
+                                            <td ;="" bgcolor="white"><b>h</b></td>
+                                            <td ;="" bgcolor="white"><b>i</b></td>
+                                            <td ;="" bgcolor="white"><b>j</b></td>
+                                            <td ;="" bgcolor="white"><b>k</b></td>
+                                            <td ;="" bgcolor="white"><b>l</b></td>
+                                            <td ;="" bgcolor="white"><b>m</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td ;="" bgcolor="white">8.167</td>
+                                            <td ;="" bgcolor="white">1.49</td>
+                                            <td ;="" bgcolor="white">2.782</td>
+                                            <td ;="" bgcolor="white">4.253</td>
+                                            <td ;="" bgcolor="white">12.702</td>
+                                            <td ;="" bgcolor="white">2.228</td>
+                                            <td ;="" bgcolor="white">2.015</td>
+                                            <td ;="" bgcolor="white">6.094</td>
+                                            <td ;="" bgcolor="white">6.966</td>
+                                            <td ;="" bgcolor="white">0.153</td>
+                                            <td ;="" bgcolor="white">0.772</td>
+                                            <td ;="" bgcolor="white">4.025</td>
+                                            <td ;="" bgcolor="white">2.406</td>
+                                        </tr>
+                                        <tr>
+                                            <td ;="" bgcolor="white"><b>n</b></td>
+                                            <td ;="" bgcolor="white"><b>o</b></td>
+                                            <td ;="" bgcolor="white"><b>p</b></td>
+                                            <td ;="" bgcolor="white"><b>q</b></td>
+                                            <td ;="" bgcolor="white"><b>r</b></td>
+                                            <td ;="" bgcolor="white"><b>s</b></td>
+                                            <td ;="" bgcolor="white"><b>t</b></td>
+                                            <td ;="" bgcolor="white"><b>u</b></td>
+                                            <td ;="" bgcolor="white"><b>v</b></td>
+                                            <td ;="" bgcolor="white"><b>w</b></td>
+                                            <td ;="" bgcolor="white"><b>x</b></td>
+                                            <td ;="" bgcolor="white"><b>y</b></td>
+                                            <td ;="" bgcolor="white"><b>z</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td ;="" bgcolor="white">6.749</td>
+                                            <td ;="" bgcolor="white">7.507</td>
+                                            <td ;="" bgcolor="white">1.929</td>
+                                            <td ;="" bgcolor="white">0.095</td>
+                                            <td ;="" bgcolor="white">5.987</td>
+                                            <td ;="" bgcolor="white">6.327</td>
+                                            <td ;="" bgcolor="white">9.056</td>
+                                            <td ;="" bgcolor="white">2.758</td>
+                                            <td ;="" bgcolor="white">0.978</td>
+                                            <td ;="" bgcolor="white">2.360</td>
+                                            <td ;="" bgcolor="white">0.150</td>
+                                            <td ;="" bgcolor="white">1.974</td>
+                                            <td ;="" bgcolor="white">0.074</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>
+                                <textarea cols="70" id="textarea" name="textarea" readonly="readonly" rows="6"></textarea>
+                                <br/>
+                                <input name="btnEn2" onclick="Next_Mono_Test()" type="button" value="Next Ciphertext"/>
+                            </p>
+                            <p>
+                                <input name="calculateFreq" onclick="CalculateFreq();" type="button" value="Calculate Frequencies in ciphertext"/> </p>
+                            <p>Ciphertext Frequencies:
+                                <br/>
+                                <br/>
+                            </p>
+                            <div id="cipherFreq" style="height: 150px;"></div>
+                            <p></p>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <p>PART II</p>
+                            <p>Note that the <i>cipher text is in lower case</i> and when you replace any character, the final character of replacement, i.e., <i>plaintext is changed to upper case</i> automatically in the following scratchpad.</p>
+                            <p>Scratchpad:
+                                <br/>
+                                <textarea cols="70" id="textarea2" name="textarea" rows="10"></textarea>
+                                <br/>
+                            </p>
+                            <p>Modify the text above (in scratchpad):</p>
+                            <p><font size="1">This is case <i>insensitive</i> function and replaces only cipher text (lower case) by plain text (upper case):</font></p>
+                            <p>Replace cipher character
+                                <textarea cols="2" id="char1" rows="1" style="display: inline;"></textarea> by plaintext character
+                                <textarea cols="2" id="char2" rows="1" style="display: inline;"></textarea> 
+                                <input name="btnModify" onclick="ModifyUserText()" style="display: inline;" type="button" value="Modify"/>
+                            </p>
+                            <p><font size="1">Use the following function to undo any unwanted exchange by giving an
+uppercase character and a lower case. This is a case sensitive function:</font></p>
+                            <br/>
+                            <p>Replace character
+                                <textarea cols="2" id="char3" rows="1" style="display: inline;"></textarea> by character
+                                <textarea cols="2" id="char4" rows="1" style="display: inline;"></textarea> 
+                                <input name="btnModify" onclick="ModifyUserText2()" style="display: inline;" type="button" value="Replace these exact characters"/>
+                            </p>
+                            <p>Your replacement history:
+                            </p>
+                            <div id="replacements" style="height: 350px; width: 350px;"></div>
+                            <p></p>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <p><b>PART III</b></p>
+                            <p>Enter your solution plaintext here:
+                                <br/>
+                                <textarea cols="70" id="textarea3" name="textarea2" rows="5"></textarea>
+                                <br/>
+                            </p>
+                            <p>Solution Key =
+                                <input id="key2" maxchars="25" name="key2" size="26" type="text"/>
+                            </p>
+                            <br/>
+                            <p>
+                                <input name="Check" onclick="checkAnswer()" type="button" value="Check Answer!"/>
+                            </p>
+                            <br/>
+                            <br/>
+                            <textarea cols="50" id="notification" name="notification" rows="1" style="border: 0pt none ;"></textarea>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <p><b>PART IV</b></p>
+                            <p>Plaintext
+                                <br/>
+                                <textarea cols="50" id="p" name="p" rows="2">defend the east wall of the castle</textarea>
+                                <br/>
+                            </p>
+                            <p>key =
+                                <input id="key" maxchars="25" name="key" size="25" type="text" value="phqgiumeaylnofdxjkrcvstzwb"/>
+                                <input name="genKey" onclick="Mono_GenRandKey()" type="button" value="Generate Random Key"/>
+                            </p>
+                            <p>
+                                <input name="btnEn" onclick="Mono_Encrypt()" type="button" value="v Encrypt v"/>
+                                <input name="btnDe" onclick="Mono_Decrypt()" type="button" value="^ Decrypt ^"/>
+                            </p>
+                            <p>
+                                <input id="punc" name="punc" type="checkbox"/> Remove Punctuation</p>
+                            <p>Ciphertext
+                                <br/>
+                                <textarea cols="50" id="c" name="c" rows="2"></textarea>
+                                <br/>
+                            </p>
+                           
+                        </div>
+		
 	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+        <script src="js/exp2.js"></script>
 </body>
 </html>
