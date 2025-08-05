@@ -1,20 +1,39 @@
-**STEP 1 :** For the given ciphertext in the **PART I** of the experiment page, the first step is to generate ciphertext by clicking on the "Next CipherText" button.
+## Procedure
 
-**STEP 2 :** Calculate frequencies of generated ciphertext by clicking on "Calculate Frequencies in Ciphertext" button
+### Part 1: Manual Letter-by-Letter Substitution
 
-**STEP 3 :** Copy the generated ciphertext from **PART I** and paste in "Scratchpad" area of **PART II**
+**STEP 1:** Enter the plaintext message you want to encrypt in the provided text field.
 
-**STEP 4 :** Analyse similarties between "Calculated Frequencies Table" and "English Alphabet Frequencies Table"
+**STEP 2:** Define your substitution mapping by entering corresponding cipher letters for each alphabet letter in the substitution table.
 
-**STEP 5 :** Based on similarities,try to make a frequency based estimation for each character of ciphertext
+**STEP 3:** Click on each letter in your plaintext to manually encrypt it using your defined substitution mapping.
 
-**STEP 6 :** Replace characters of CipherText in Scratchpad with a character estimated previously using a **Modify** function of **PART II**
+**STEP 4:** Observe how the cipher text is built character by character as you click on each letter.
 
-**STEP 7 :** Based on Hints from Ciphertext in "Scratchpad" area make more replacement of ciphertext characters
+**STEP 5:** Use the "Check" button to verify if your manual encryption is correct.
 
-**STEP 8 :** Repeat **Step 7** till you get a meaningful English Text
+### Part 2: Phrase-Based Substitution
 
-**STEP 9 :** Finally, observe the deciphered plaintext in Scratchpad Area,if a meaningful English text is formed cut-and-paste it in the text-field named "Solution Plaintext" of **PART III**. Also enter the final character mapping in the"Solution Key" in **PART III** and click on "Check Answer" button.
+**STEP 6:** Enter the plaintext phrase you want to encrypt in the input field.
 
-**STEP 10[OPTIONAL] :** Verify that your answer is correct, by encrypting the solution plaintext with your key in **PART IV**.
+**STEP 7:** Set up your substitution key mapping in the table if not already configured.
 
+**STEP 8:** Click the "Encrypt" button to automatically encrypt the entire phrase at once.
+
+**STEP 9:** Review the generated ciphertext and analyze the transformation patterns.
+
+### Part 3: Decryption Process
+
+**STEP 10:** Enter the ciphertext you want to decrypt in the appropriate field.
+
+**STEP 11:** Apply the reverse substitution using the same key table to convert ciphertext back to plaintext.
+
+**STEP 12:** Verify that the decrypted text matches the original message.
+
+### Part 4: Solution Key Verification
+
+**STEP 13:** Use the provided solution key to test encryption and decryption of messages.
+
+**STEP 14:** Compare results with your manually created substitutions to verify correctness.
+
+**STEP 15:** Analyze frequency patterns and understand the security implications of substitution ciphers.
