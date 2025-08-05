@@ -1,1 +1,351 @@
-/* You CSS goes in here */
+/* Mobile-responsive styles for substitution cipher experiment */
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  line-height: 1.4;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+/* Frequency tables - consistent styling */
+.frequency-table-container {
+  overflow-x: auto;
+  margin: 15px 0;
+  border: 1px solid #000;
+  border-radius: 0;
+  text-align: center;
+}
+
+.frequency-table {
+  width: 100%;
+  min-width: 500px;
+  border-collapse: separate;
+  border-spacing: 1px;
+  font-size: 12px;
+  background: #000;
+}
+
+.frequency-table td {
+  padding: 8px 4px;
+  text-align: center;
+  border: none;
+  background: white;
+  font-weight: normal;
+}
+
+.frequency-table td b {
+  font-weight: bold;
+}
+
+/* Ciphertext frequency table */
+#cipherFreq table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 1px;
+  background: #000;
+  margin: 0;
+}
+
+#cipherFreq td {
+  padding: 8px 4px;
+  text-align: center;
+  border: none;
+  background: white;
+  font-weight: normal;
+}
+
+/* Responsive textareas */
+textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 14px;
+  resize: vertical;
+}
+
+/* Notification textarea */
+#notification {
+  background: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Desktop: limit textarea width */
+@media (min-width: 769px) {
+  textarea {
+    max-width: 600px;
+  }
+
+  #key2 {
+    max-width: 400px;
+  }
+}
+
+/* Responsive input fields */
+input[type="text"] {
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#key2 {
+  width: 100%;
+}
+
+/* Button styling - gray color scheme */
+input[type="button"],
+button {
+  padding: 8px 12px;
+  margin: 3px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: #f5f5f5;
+  color: #333;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="button"]:hover,
+button:hover {
+  background: #e0e0e0;
+}
+
+/* Special button styling */
+.copy-button {
+  background: #28a745 !important;
+  color: white !important;
+  border: 1px solid #28a745 !important;
+  padding: 8px 12px;
+  margin: 10px 0;
+}
+
+.copy-button:hover {
+  background: #1e7e34 !important;
+}
+
+/* Desktop button layout */
+@media (min-width: 769px) {
+  .button-group {
+    display: inline-block;
+    margin: 10px 0;
+  }
+
+  .button-group input[type="button"] {
+    display: inline-block;
+    width: auto;
+    margin: 3px;
+    min-width: 120px;
+  }
+
+  .copy-button {
+    width: auto;
+    display: inline-block;
+  }
+
+  input[type="button"],
+  button {
+    width: auto;
+    display: inline-block;
+    min-height: auto;
+  }
+}
+
+/* Character replacement inputs */
+.char-input {
+  width: 40px;
+  height: 35px;
+  text-align: center;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+/* Phrase replacement inputs */
+.phrase-input {
+  min-width: 120px;
+  width: auto;
+  height: 35px;
+  text-align: left;
+  font-size: 14px;
+  margin: 0 5px;
+  padding: 5px 8px;
+}
+
+/* Replacement controls */
+.replacement-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.replacement-row label {
+  font-weight: bold;
+  min-width: 60px;
+}
+
+/* Desktop replacement controls */
+@media (min-width: 769px) {
+  .replacement-row {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .replacement-row label {
+    flex-shrink: 0;
+  }
+}
+
+/* Replacement history */
+#replacements {
+  width: 100%;
+  max-width: 100%;
+  margin: 10px 0;
+  height: auto;
+  min-height: 60px;
+  max-height: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #f9f9f9;
+  font-family: monospace;
+  font-size: 12px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 769px) {
+  #replacements {
+    max-width: 500px;
+  }
+}
+
+/* Section headers */
+h2,
+.part-header {
+  background: #e9ecef;
+  padding: 10px;
+  margin: 20px 0 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Reduce excessive spacing */
+p {
+  margin: 10px 0;
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 2px solid #dee2e6;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .content {
+    padding: 10px;
+  }
+
+  .frequency-table {
+    font-size: 10px;
+    min-width: 400px;
+  }
+
+  .frequency-table td {
+    padding: 4px 2px;
+  }
+
+  /* Ensure ciphertext frequency table matches */
+  #cipherFreq table {
+    font-size: 10px;
+    min-width: 400px;
+  }
+
+  #cipherFreq td {
+    padding: 4px 2px;
+  }
+
+  textarea {
+    font-size: 13px;
+  }
+
+  /* Mobile buttons - full width */
+  input[type="button"],
+  button {
+    width: 100%;
+    margin: 5px 0;
+    min-height: 44px; /* Touch-friendly size */
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .button-group {
+    display: block;
+  }
+
+  .copy-button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .replacement-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .char-input {
+    width: 60px;
+    margin: 5px auto;
+  }
+
+  .phrase-input {
+    width: 100%;
+    margin: 5px 0;
+    max-width: 300px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .frequency-table {
+    font-size: 9px;
+    min-width: 350px;
+  }
+
+  .frequency-table td {
+    padding: 3px 1px;
+  }
+
+  /* Ensure ciphertext frequency table matches */
+  #cipherFreq table {
+    font-size: 9px;
+    min-width: 350px;
+  }
+
+  #cipherFreq td {
+    padding: 3px 1px;
+  }
+
+  textarea {
+    font-size: 12px;
+  }
+}
