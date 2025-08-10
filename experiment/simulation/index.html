@@ -5,314 +5,715 @@
     <link rel="stylesheet" href="./css/main.css" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Guard against iframe resizer conflicts -->
+    <script>
+      // Prevent iframe resizer conflicts
+      if (typeof window.sendPostMessage !== "undefined") {
+        console.log("iframe resizer already loaded, preventing conflicts");
+      }
+
+      // Suppress iframe resizer errors
+      window.addEventListener("error", function (e) {
+        if (e.message && e.message.includes("sendPostMessage")) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    </script>
   </head>
   <body>
     <!-- Your code goes here-->
 
     <div class="content" id="experiment-article-section-4-content">
-      <!--<h2>Breaking the Mono Alphabetic Substitution Cipher</h2>-->
+      <!-- Cipher Selection Controls -->
+      <div
+        style="
+          background: #f0f8ff;
+          padding: 15px;
+          border-radius: 8px;
+          margin: 15px 0;
+          border: 2px solid #4a90e2;
+        "
+      >
+        <h3>🔓 Mono-Alphabetic Substitution Cipher Analysis</h3>
+        <p>
+          Decrypt the cipher text using frequency analysis and substitution
+          techniques. Tools are provided to assist your cryptanalysis.
+        </p>
+        <div style="margin: 10px 0">
+          <button
+            onclick="Next_Mono_Test()"
+            style="
+              background: #28a745;
+              color: white;
+              border: none;
+              padding: 10px 15px;
+              border-radius: 4px;
+              cursor: pointer;
+              margin: 5px;
+            "
+          >
+            📝 Next Ciphertext
+          </button>
+          <button
+            onclick="Reset()"
+            style="
+              background: #dc3545;
+              color: white;
+              border: none;
+              padding: 10px 15px;
+              border-radius: 4px;
+              cursor: pointer;
+              margin: 5px;
+            "
+          >
+            🔄 Reset Workspace
+          </button>
+          <button
+            onclick="CalculateFreq();"
+            style="
+              background: #fd7e14;
+              color: white;
+              border: none;
+              padding: 10px 15px;
+              border-radius: 4px;
+              cursor: pointer;
+              margin: 5px;
+            "
+          >
+            📊 Calculate Frequencies
+          </button>
+        </div>
+      </div>
 
-      <div class="part-header">PART I</div>
-      <p>
-        Decrypt the following cipher text. A tool to simulate the
-        Mono-Alphabetic Subsitution cipher is provided beneath for your
-        assistance.
-      </p>
-      <p>
-        Here is the table of frequencies of English alphabets for your
-        reference:
-      </p>
-      <div class="frequency-table-container">
-        <table class="frequency-table">
-          <tbody>
-            <tr>
-              <td><b>a</b></td>
-              <td><b>b</b></td>
-              <td><b>c</b></td>
-              <td><b>d</b></td>
-              <td><b>e</b></td>
-              <td><b>f</b></td>
-              <td><b>g</b></td>
-              <td><b>h</b></td>
-              <td><b>i</b></td>
-              <td><b>j</b></td>
-              <td><b>k</b></td>
-              <td><b>l</b></td>
-              <td><b>m</b></td>
-            </tr>
-            <tr>
-              <td>8.167</td>
-              <td>1.49</td>
-              <td>2.782</td>
-              <td>4.253</td>
-              <td>12.702</td>
-              <td>2.228</td>
-              <td>2.015</td>
-              <td>6.094</td>
-              <td>6.966</td>
-              <td>0.153</td>
-              <td>0.772</td>
-              <td>4.025</td>
-              <td>2.406</td>
-            </tr>
-            <tr>
-              <td><b>n</b></td>
-              <td><b>o</b></td>
-              <td><b>p</b></td>
-              <td><b>q</b></td>
-              <td><b>r</b></td>
-              <td><b>s</b></td>
-              <td><b>t</b></td>
-              <td><b>u</b></td>
-              <td><b>v</b></td>
-              <td><b>w</b></td>
-              <td><b>x</b></td>
-              <td><b>y</b></td>
-              <td><b>z</b></td>
-            </tr>
-            <tr>
-              <td>6.749</td>
-              <td>7.507</td>
-              <td>1.929</td>
-              <td>0.095</td>
-              <td>5.987</td>
-              <td>6.327</td>
-              <td>9.056</td>
-              <td>2.758</td>
-              <td>0.978</td>
-              <td>2.360</td>
-              <td>0.150</td>
-              <td>1.974</td>
-              <td>0.074</td>
-            </tr>
-          </tbody>
+      <h3>Part 1: Ciphertext Analysis</h3>
+      <div
+        style="
+          background: #f8f9fa;
+          padding: 15px;
+          border-radius: 8px;
+          margin: 15px 0;
+        "
+      >
+        <h4>📋 Reference: English Letter Frequencies</h4>
+        <p>Use this frequency table to guide your cryptanalysis:</p>
+        <div class="frequency-table-container">
+          <table class="frequency-table">
+            <tbody>
+              <tr>
+                <td><b>a</b></td>
+                <td><b>b</b></td>
+                <td><b>c</b></td>
+                <td><b>d</b></td>
+                <td><b>e</b></td>
+                <td><b>f</b></td>
+                <td><b>g</b></td>
+                <td><b>h</b></td>
+                <td><b>i</b></td>
+                <td><b>j</b></td>
+                <td><b>k</b></td>
+                <td><b>l</b></td>
+                <td><b>m</b></td>
+              </tr>
+              <tr>
+                <td>8.167</td>
+                <td>1.49</td>
+                <td>2.782</td>
+                <td>4.253</td>
+                <td>12.702</td>
+                <td>2.228</td>
+                <td>2.015</td>
+                <td>6.094</td>
+                <td>6.966</td>
+                <td>0.153</td>
+                <td>0.772</td>
+                <td>4.025</td>
+                <td>2.406</td>
+              </tr>
+              <tr>
+                <td><b>n</b></td>
+                <td><b>o</b></td>
+                <td><b>p</b></td>
+                <td><b>q</b></td>
+                <td><b>r</b></td>
+                <td><b>s</b></td>
+                <td><b>t</b></td>
+                <td><b>u</b></td>
+                <td><b>v</b></td>
+                <td><b>w</b></td>
+                <td><b>x</b></td>
+                <td><b>y</b></td>
+                <td><b>z</b></td>
+              </tr>
+              <tr>
+                <td>6.749</td>
+                <td>7.507</td>
+                <td>1.929</td>
+                <td>0.095</td>
+                <td>5.987</td>
+                <td>6.327</td>
+                <td>9.056</td>
+                <td>2.758</td>
+                <td>0.978</td>
+                <td>2.360</td>
+                <td>0.150</td>
+                <td>1.974</td>
+                <td>0.074</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse">
+          <tr>
+            <td
+              style="
+                width: 20%;
+                font-weight: bold;
+                padding: 8px;
+                vertical-align: top;
+              "
+            >
+              <strong>🔍 Current Ciphertext:</strong><br />
+              <small style="color: #666"
+                >The encrypted text to be analyzed</small
+              >
+            </td>
+            <td style="width: 80%; padding: 8px">
+              <textarea
+                cols="70"
+                id="textarea"
+                name="textarea"
+                readonly="readonly"
+                rows="6"
+                style="
+                  width: 100%;
+                  padding: 8px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  font-family: monospace;
+                  resize: vertical;
+                "
+              ></textarea>
+            </td>
+          </tr>
+        </table>
+
+        <h4>📊 Ciphertext Frequency Analysis</h4>
+        <p><strong>Letter frequencies in the current ciphertext:</strong></p>
+        <div id="cipherFreq" style="height: 150px; margin: 15px 0"></div>
+      </div>
+
+      <hr />
+
+      <h3>Part 2: Interactive Substitution Workspace</h3>
+      <div
+        style="
+          background: #fff3cd;
+          padding: 15px;
+          border-radius: 8px;
+          margin: 15px 0;
+          border-left: 4px solid #ffc107;
+        "
+      >
+        <h4>✏️ Substitution Scratchpad</h4>
+        <p>
+          <strong>Note:</strong> Cipher text is in <i>lower case</i>. When you
+          replace characters, the final plaintext characters will be shown in
+          <i>upper case</i>
+          automatically.
+        </p>
+
+        <table style="width: 100%; border-collapse: collapse">
+          <tr>
+            <td
+              style="
+                width: 20%;
+                font-weight: bold;
+                padding: 8px;
+                vertical-align: top;
+              "
+            >
+              <strong>📝 Working Area:</strong><br />
+              <small style="color: #666"
+                >Make substitutions and track your progress</small
+              >
+            </td>
+            <td style="width: 80%; padding: 8px">
+              <textarea
+                cols="70"
+                id="textarea2"
+                name="textarea"
+                rows="10"
+                style="
+                  width: 100%;
+                  padding: 8px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  font-family: monospace;
+                  resize: vertical;
+                "
+              ></textarea>
+            </td>
+          </tr>
+        </table>
+
+        <h4>🔄 Substitution Tools</h4>
+        <p><strong>Replace cipher characters with plaintext:</strong></p>
+        <p>
+          <small style="color: #666"
+            >This function is case <i>insensitive</i> and replaces cipher text
+            (lower case) with plain text (upper case):</small
+          >
+        </p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 10px 0">
+          <tr>
+            <td style="padding: 8px; width: 15%; font-weight: bold">
+              Replace cipher:
+            </td>
+            <td style="padding: 8px; width: 25%">
+              <input
+                type="text"
+                id="char1"
+                class="phrase-input"
+                placeholder="cipher character"
+                style="
+                  width: 100%;
+                  padding: 6px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                "
+              />
+            </td>
+            <td style="padding: 8px; width: 15%; font-weight: bold">
+              with plaintext:
+            </td>
+            <td style="padding: 8px; width: 25%">
+              <input
+                type="text"
+                id="char2"
+                class="phrase-input"
+                placeholder="plain character"
+                style="
+                  width: 100%;
+                  padding: 6px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                "
+              />
+            </td>
+            <td style="padding: 8px; width: 20%">
+              <input
+                name="btnModify"
+                onclick="ModifyUserText()"
+                type="button"
+                value="✓ Apply"
+                style="
+                  background: #28a745;
+                  color: white;
+                  border: none;
+                  padding: 8px 12px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  width: 100%;
+                "
+              />
+            </td>
+          </tr>
+        </table>
+
+        <p><strong>Undo substitutions (case sensitive):</strong></p>
+        <p>
+          <small style="color: #666"
+            >Use this function to undo unwanted changes by specifying exact
+            characters:</small
+          >
+        </p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 10px 0">
+          <tr>
+            <td style="padding: 8px; width: 15%; font-weight: bold">
+              Replace text:
+            </td>
+            <td style="padding: 8px; width: 25%">
+              <input
+                type="text"
+                id="char3"
+                class="phrase-input"
+                placeholder="any text"
+                style="
+                  width: 100%;
+                  padding: 6px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                "
+              />
+            </td>
+            <td style="padding: 8px; width: 15%; font-weight: bold">
+              with text:
+            </td>
+            <td style="padding: 8px; width: 25%">
+              <input
+                type="text"
+                id="char4"
+                class="phrase-input"
+                placeholder="replacement"
+                style="
+                  width: 100%;
+                  padding: 6px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                "
+              />
+            </td>
+            <td style="padding: 8px; width: 20%">
+              <input
+                name="btnModify"
+                onclick="ModifyUserText2()"
+                type="button"
+                value="⟲ Replace"
+                style="
+                  background: #6c757d;
+                  color: white;
+                  border: none;
+                  padding: 8px 12px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  width: 100%;
+                "
+              />
+            </td>
+          </tr>
+        </table>
+
+        <h4>📜 Replacement History</h4>
+        <div
+          id="replacements"
+          style="
+            background: #f8f9fa;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            min-height: 40px;
+            margin: 10px 0;
+          "
+        ></div>
+      </div>
+
+      <hr />
+
+      <h3>Part 3: Solution Verification</h3>
+      <div
+        style="
+          background: #d1ecf1;
+          padding: 15px;
+          border-radius: 8px;
+          margin: 15px 0;
+          border-left: 4px solid #17a2b8;
+        "
+      >
+        <h4>🎯 Submit Your Solution</h4>
+        <p>
+          After analyzing the ciphertext and making substitutions in the
+          workspace above, enter your final solution below:
+        </p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 10px 0">
+          <tr>
+            <td style="padding: 8px; vertical-align: top">
+              <input
+                type="button"
+                onclick="copyFromScratchpad()"
+                value="📋 Copy from Scratchpad"
+                class="copy-button"
+                title="Copy your work from the scratchpad above"
+                style="
+                  background: #17a2b8;
+                  color: white;
+                  border: none;
+                  padding: 8px 12px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  margin-bottom: 10px;
+                "
+              />
+            </td>
+          </tr>
+        </table>
+
+        <table style="width: 100%; border-collapse: collapse">
+          <tr>
+            <td
+              style="
+                width: 20%;
+                font-weight: bold;
+                padding: 8px;
+                vertical-align: top;
+              "
+            >
+              <strong>📝 Final Plaintext:</strong><br />
+              <small style="color: #666"
+                >Enter the complete decrypted message</small
+              >
+            </td>
+            <td style="width: 60%; padding: 8px">
+              <textarea
+                cols="70"
+                id="textarea3"
+                name="textarea2"
+                rows="5"
+                placeholder="Enter the complete decrypted plaintext..."
+                style="
+                  width: 100%;
+                  padding: 8px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  font-family: monospace;
+                  resize: vertical;
+                "
+              ></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                width: 20%;
+                font-weight: bold;
+                padding: 8px;
+                vertical-align: top;
+              "
+            >
+              <strong>🔑 Solution Key:</strong><br />
+              <small style="color: #666"
+                >26 letters (a-z), each exactly once</small
+              >
+            </td>
+            <td style="width: 60%; padding: 8px">
+              <input
+                id="key2"
+                maxchars="26"
+                name="key2"
+                type="text"
+                placeholder="abcdefghijklmnopqrstuvwxyz"
+                style="
+                  width: 100%;
+                  padding: 8px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  font-family: monospace;
+                "
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="padding: 8px">
+              <input
+                name="Check"
+                onclick="checkAnswer()"
+                type="button"
+                value="🔍 Check Answer!"
+                style="
+                  background: #007bff;
+                  color: white;
+                  border: none;
+                  padding: 10px 20px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  font-weight: bold;
+                "
+              />
+            </td>
+          </tr>
+        </table>
+
+        <div
+          id="notification"
+          style="
+            padding: 10px;
+            margin: 10px 0;
+            margin-left: 2em;
+            font-weight: bold;
+            border-radius: 5px;
+            text-align: left;
+            min-height: 20px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+          "
+        >
+          Feedback will appear here...
+        </div>
+      </div>
+
+      <hr />
+
+      <h3>Part 4: Encryption Tool</h3>
+      <div
+        style="
+          background: #f8f9fa;
+          padding: 15px;
+          border-radius: 8px;
+          margin: 15px 0;
+        "
+      >
+        <h4>🛠️ Mono-Alphabetic Substitution Tool</h4>
+        <p>Use this tool to encrypt/decrypt with your own key and plaintext:</p>
+
+        <table style="width: 100%; border-collapse: collapse">
+          <tr>
+            <td
+              style="
+                width: 20%;
+                font-weight: bold;
+                padding: 8px;
+                vertical-align: top;
+              "
+            >
+              <strong>📄 Plaintext:</strong><br />
+              <small style="color: #666">Your message to encrypt</small>
+            </td>
+            <td style="width: 60%; padding: 8px">
+              <textarea
+                cols="50"
+                id="p"
+                name="p"
+                rows="2"
+                style="
+                  width: 100%;
+                  padding: 8px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  font-family: monospace;
+                  resize: vertical;
+                "
+              >
+defend the east wall of the castle</textarea
+              >
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                width: 20%;
+                font-weight: bold;
+                padding: 8px;
+                vertical-align: middle;
+              "
+            >
+              <strong>🔑 Substitution Key:</strong><br />
+              <small style="color: #666">26-letter substitution alphabet</small>
+            </td>
+            <td style="width: 60%; padding: 8px">
+              <input
+                id="key"
+                maxchars="25"
+                name="key"
+                size="25"
+                type="text"
+                value="phqgiumeaylnofdxjkrcvstzwb"
+                style="
+                  width: 70%;
+                  padding: 8px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  font-family: monospace;
+                  margin-right: 10px;
+                "
+              />
+              <input
+                name="genKey"
+                onclick="Mono_GenRandKey()"
+                type="button"
+                value="🎲 Random Key"
+                style="
+                  background: #6c757d;
+                  color: white;
+                  border: none;
+                  padding: 8px 12px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                "
+              />
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="padding: 8px">
+              <div class="button-group">
+                <input
+                  name="btnEn"
+                  onclick="Mono_Encrypt()"
+                  type="button"
+                  value="⬇ Encrypt ⬇"
+                  style="
+                    background: #28a745;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    margin: 5px;
+                  "
+                />
+                <input
+                  name="btnDe"
+                  onclick="Mono_Decrypt()"
+                  type="button"
+                  value="⬆ Decrypt ⬆"
+                  style="
+                    background: #dc3545;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    margin: 5px;
+                  "
+                />
+              </div>
+              <div style="margin-top: 10px">
+                <input id="punc" name="punc" type="checkbox" />
+                <label for="punc">Remove Punctuation</label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                width: 20%;
+                font-weight: bold;
+                padding: 8px;
+                vertical-align: top;
+              "
+            >
+              <strong>🔒 Ciphertext:</strong><br />
+              <small style="color: #666">Encrypted result</small>
+            </td>
+            <td style="width: 60%; padding: 8px">
+              <textarea
+                cols="50"
+                id="c"
+                name="c"
+                rows="2"
+                style="
+                  width: 100%;
+                  padding: 8px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  font-family: monospace;
+                  resize: vertical;
+                "
+              ></textarea>
+            </td>
+          </tr>
         </table>
       </div>
-      <p>
-        <textarea
-          cols="70"
-          id="textarea"
-          name="textarea"
-          readonly="readonly"
-          rows="6"
-        ></textarea>
-      </p>
-      <div class="button-group">
-        <input
-          name="btnEn2"
-          onclick="Next_Mono_Test()"
-          type="button"
-          value="Next Ciphertext"
-        />
-        <input
-          name="btnReset"
-          onclick="Reset()"
-          type="button"
-          value="Reset Workspace"
-        />
-      </div>
-      <p>
-        <input
-          name="calculateFreq"
-          onclick="CalculateFreq();"
-          type="button"
-          value="Calculate Frequencies in ciphertext"
-        />
-      </p>
-      <p>
-        <strong>Ciphertext Frequencies:</strong>
-      </p>
-      <div id="cipherFreq" style="height: 150px; margin: 15px 0"></div>
-
-      <hr />
-
-      <div class="part-header">PART II</div>
-      <p>
-        Note that the <i>cipher text is in lower case</i> and when you replace
-        any character, the final character of replacement, i.e.,
-        <i>plaintext is changed to upper case</i> automatically in the following
-        scratchpad.
-      </p>
-      <p>
-        <strong>Scratchpad:</strong>
-      </p>
-      <textarea cols="70" id="textarea2" name="textarea" rows="10"></textarea>
-
-      <p><strong>Modify the text above (in scratchpad):</strong></p>
-      <p>
-        <small
-          >This is case <i>insensitive</i> function and replaces only cipher
-          text (lower case) by plain text (upper case):</small
-        >
-      </p>
-
-      <div class="replacement-row">
-        <label>Replace cipher text</label>
-        <input
-          type="text"
-          id="char1"
-          class="phrase-input"
-          placeholder="cipher text or character"
-        />
-        <label>by plaintext</label>
-        <input
-          type="text"
-          id="char2"
-          class="phrase-input"
-          placeholder="plain text or character"
-        />
-        <input
-          name="btnModify"
-          onclick="ModifyUserText()"
-          type="button"
-          value="Modify"
-        />
-      </div>
-
-      <p>
-        <small
-          >Use the following function to undo any unwanted exchange by giving an
-          uppercase character and a lower case. This is a case sensitive
-          function:</small
-        >
-      </p>
-
-      <div class="replacement-row">
-        <label>Replace text</label>
-        <input
-          type="text"
-          id="char3"
-          class="phrase-input"
-          placeholder="any text"
-        />
-        <label>by text</label>
-        <input
-          type="text"
-          id="char4"
-          class="phrase-input"
-          placeholder="replacement text"
-        />
-        <input
-          name="btnModify"
-          onclick="ModifyUserText2()"
-          type="button"
-          value="Replace these exact characters"
-        />
-      </div>
-
-      <p><strong>Your replacement history:</strong></p>
-      <div id="replacements"></div>
-
-      <hr />
-
-      <div class="part-header">PART III</div>
-      <p>
-        After analyzing the ciphertext and making substitutions in the
-        scratchpad above, enter your final solution below:
-      </p>
-      <p>
-        <input
-          type="button"
-          onclick="copyFromScratchpad()"
-          value="📋 Copy from Scratchpad"
-          class="copy-button"
-          title="Copy your work from the scratchpad above"
-        />
-      </p>
-      <p>
-        <strong>Enter your solution plaintext here:</strong>
-      </p>
-      <textarea
-        cols="70"
-        id="textarea3"
-        name="textarea2"
-        rows="5"
-        placeholder="Enter the complete decrypted plaintext..."
-      ></textarea>
-
-      <p>
-        <strong
-          >Solution Key (26 letters, each letter a-z exactly once):</strong
-        >
-      </p>
-      <input
-        id="key2"
-        maxchars="26"
-        name="key2"
-        type="text"
-        placeholder="abcdefghijklmnopqrstuvwxyz"
-      />
-
-      <p>
-        <input
-          name="Check"
-          onclick="checkAnswer()"
-          type="button"
-          value="Check Answer!"
-        />
-      </p>
-
-      <textarea
-        cols="70"
-        id="notification"
-        name="notification"
-        rows="3"
-        readonly
-        placeholder="Feedback will appear here..."
-      ></textarea>
-
-      <hr />
-
-      <div class="part-header">PART IV</div>
-      <p>
-        <strong>Plaintext</strong>
-      </p>
-      <textarea cols="50" id="p" name="p" rows="2">
-defend the east wall of the castle</textarea
-      >
-
-      <p>
-        <strong>Key:</strong>
-        <input
-          id="key"
-          maxchars="25"
-          name="key"
-          size="25"
-          type="text"
-          value="phqgiumeaylnofdxjkrcvstzwb"
-        />
-        <input
-          name="genKey"
-          onclick="Mono_GenRandKey()"
-          type="button"
-          value="Generate Random Key"
-        />
-      </p>
-
-      <div class="button-group">
-        <input
-          name="btnEn"
-          onclick="Mono_Encrypt()"
-          type="button"
-          value="⬇ Encrypt ⬇"
-        />
-        <input
-          name="btnDe"
-          onclick="Mono_Decrypt()"
-          type="button"
-          value="⬆ Decrypt ⬆"
-        />
-      </div>
-
-      <p><input id="punc" name="punc" type="checkbox" /> Remove Punctuation</p>
-
-      <p>
-        <strong>Ciphertext</strong>
-      </p>
-      <textarea cols="50" id="c" name="c" rows="2"></textarea>
     </div>
 
     <!-- Add JS at the bottom of HTML file -->
+    <script src="js/mobile-detection.js"></script>
     <script src="js/exp2.js"></script>
   </body>
 </html>
