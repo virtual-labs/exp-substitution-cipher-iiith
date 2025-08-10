@@ -1,7 +1,3 @@
-## References
-
-<br>
-
 - [Substitution Cipher - Wikipedia](https://en.wikipedia.org/wiki/Substitution_cipher)
 - [Introduction to Cryptography and Substitution Ciphers - Khan Academy](https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/intro-to-cryptography)
 - [Classical Cryptography Techniques - GeeksforGeeks](https://www.geeksforgeeks.org/classical-cryptography-techniques/)

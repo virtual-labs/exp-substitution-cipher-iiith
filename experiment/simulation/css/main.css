@@ -1,26 +1,123 @@
-/* Mobile-responsive styles for substitution cipher experiment */
+/* Substitution Cipher Simulation Styles - MAC Style */
 
-/* Base styles */
 body {
-  margin: 0;
-  padding: 10px;
-  font-family: Arial, sans-serif;
-  line-height: 1.4;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
+  margin: 20px;
+  line-height: 1.6;
+  background-color: #f8f9fa;
 }
 
 .content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 15px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+  margin-top: 30px;
+}
+
+h4 {
+  color: #495057;
+  margin-bottom: 10px;
+}
+
+h5 {
+  color: #6c757d;
+  margin-bottom: 8px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 10px 0;
+  width: 100%;
+}
+
+td {
+  padding: 8px;
+  vertical-align: top;
+}
+
+td:first-child {
+  font-weight: bold;
+  min-width: 150px;
+}
+
+textarea {
+  font-family: monospace;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  resize: vertical;
+  width: 100%;
   box-sizing: border-box;
+}
+
+input[type="button"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 2px;
+  transition: background-color 0.2s ease;
+}
+
+input[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+input[type="text"] {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#notification,
+#notification2 {
+  min-height: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px 0;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+/* Enhanced button styling */
+.button-group {
+  margin: 10px 0;
+}
+
+.copy-button {
+  background: #17a2b8 !important;
+}
+
+.copy-button:hover {
+  background: #138496 !important;
 }
 
 /* Frequency tables - consistent styling */
 .frequency-table-container {
   overflow-x: auto;
   margin: 15px 0;
-  border: 1px solid #000;
-  border-radius: 0;
+  border-radius: 4px;
   text-align: center;
 }
 
@@ -31,6 +128,8 @@ body {
   border-spacing: 1px;
   font-size: 12px;
   background: #000;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .frequency-table td {
@@ -52,6 +151,8 @@ body {
   border-spacing: 1px;
   background: #000;
   margin: 0;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 #cipherFreq td {
@@ -62,38 +163,76 @@ body {
   font-weight: normal;
 }
 
-/* Responsive textareas */
-textarea {
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    margin: 10px;
+  }
+
+  .content {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  .frequency-table {
+    font-size: 11px;
+  }
+
+  textarea {
+    font-size: 14px;
+  }
+}
+
+/* Part headers for backward compatibility */
+.part-header {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  margin: 20px 0 10px 0;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Replacement row styling for backward compatibility */
+.replacement-row {
   margin: 10px 0;
-  padding: 8px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.replacement-row label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.phrase-input {
+  padding: 6px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-family: monospace;
-  font-size: 14px;
-  resize: vertical;
+  min-width: 100px;
 }
 
-/* Notification textarea */
-#notification {
-  background: #f9f9f9;
-  font-family: Arial, sans-serif;
-}
-
-/* Desktop: limit textarea width */
-@media (min-width: 769px) {
-  textarea {
-    max-width: 600px;
+@media (max-width: 768px) {
+  .replacement-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  #key2 {
-    max-width: 400px;
+  .replacement-row label {
+    margin-bottom: 5px;
   }
 }
 
-/* Responsive input fields */
+/* Legacy CSS preserved for backward compatibility */
 input[type="text"] {
   box-sizing: border-box;
   padding: 8px;

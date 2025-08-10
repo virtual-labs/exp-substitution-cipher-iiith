@@ -1,5 +1,3 @@
-## Objective
-
 After completing this experiment, students will be able to:
 
 1. **Understand Substitution Cipher Fundamentals**: Comprehend the basic principles and mechanisms of monoalphabetic substitution ciphers, including how each letter in the plaintext is replaced by a corresponding letter in the ciphertext according to a fixed substitution key.

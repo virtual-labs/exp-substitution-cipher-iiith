@@ -1,3 +1,9 @@
+// Guard against iframe resizer conflicts
+if (typeof window.sendPostMessage !== "undefined") {
+  // If sendPostMessage already exists, avoid redeclaration
+  console.log("sendPostMessage already defined, skipping redeclaration");
+}
+
 function Mono_Encrypt() {
   plaintext = document.getElementById("p").value.toLowerCase();
   key = document
@@ -110,6 +116,29 @@ window.onload = function () {
     ciphers[current_cipher].toLowerCase();
   document.getElementById("textarea2").value =
     ciphers[current_cipher].toLowerCase();
+
+  // Reset all input fields to default values
+  document.getElementById("char1").value = "";
+  document.getElementById("char2").value = "";
+  var char3 = document.getElementById("char3");
+  var char4 = document.getElementById("char4");
+  if (char3) char3.value = "";
+  if (char4) char4.value = "";
+
+  document.getElementById("textarea3").value = "";
+  document.getElementById("key2").value = "";
+
+  // Clear replacement history
+  document.getElementById("replacements").innerHTML = "";
+
+  // Set default notification
+  var notification = document.getElementById("notification");
+  if (notification) {
+    notification.innerHTML = "Feedback will appear here...";
+    notification.style.color = "black";
+    notification.style.backgroundColor = "#f8f9fa";
+    notification.style.border = "1px solid #dee2e6";
+  }
 };
 
 function Next_Mono_Test() {
@@ -122,8 +151,29 @@ function Next_Mono_Test() {
   // Also update the scratchpad with new ciphertext
   document.getElementById("textarea2").value =
     ciphers[current_cipher].toLowerCase();
+
+  // Reset all input fields to default values
+  document.getElementById("char1").value = "";
+  document.getElementById("char2").value = "";
+  var char3 = document.getElementById("char3");
+  var char4 = document.getElementById("char4");
+  if (char3) char3.value = "";
+  if (char4) char4.value = "";
+
+  document.getElementById("textarea3").value = "";
+  document.getElementById("key2").value = "";
+
   // Clear replacement history when switching to new ciphertext
   document.getElementById("replacements").innerHTML = "";
+
+  // Clear notification
+  var notification = document.getElementById("notification");
+  if (notification) {
+    notification.innerHTML = "Feedback will appear here...";
+    notification.style.color = "black";
+    notification.style.backgroundColor = "#f8f9fa";
+    notification.style.border = "1px solid #dee2e6";
+  }
 }
 
 function CalculateFreq() {
@@ -136,7 +186,7 @@ function CalculateFreq() {
   var charValOfA = astring.charCodeAt(0);
   for (var i = 0; i < cipherText.length; i++) {
     var index = cipherText.charCodeAt(i) - charValOfA;
-    if (index >= 0 && index <= 26) {
+    if (index >= 0 && index <= 25) {
       freq[index]++;
     }
   }
@@ -145,60 +195,98 @@ function CalculateFreq() {
     totalChars += freq[i];
   }
 
-  var output =
-    "<table border='0'; cellspacing='1'; bgcolor='black'; cellpadding='3';><tr>";
+  // Generate table with same styling as the reference frequency table
+  var output = '<div class="frequency-table-container">';
+  output += '<table class="frequency-table">';
+  output += "<tbody>";
+
+  // First row: letters a-m
+  output += "<tr>";
   for (var i = 0; i < 13; i++) {
-    output += "<td bgcolor='white'; style=\"width:20px\"><b>";
-    output += String.fromCharCode(i + charValOfA);
-    output += "</b></td> ";
+    output += "<td><b>" + String.fromCharCode(i + charValOfA) + "</b></td>";
   }
-  output += "</tr><tr>";
+  output += "</tr>";
+
+  // Second row: frequencies for a-m
+  output += "<tr>";
   for (var i = 0; i < 13; i++) {
-    output += "<td bgcolor='white'; style=\"width:20px\">";
-    var num = freq[i] / totalChars;
-    output += Math.round(num * 100000) / 1000;
-    if (num == 0) {
-      output += ".000";
+    var num = totalChars > 0 ? freq[i] / totalChars : 0;
+    var percentage = Math.round(num * 100000) / 1000;
+    if (percentage === 0) {
+      percentage = "0.000";
     }
-    output += "</td> ";
+    output += "<td>" + percentage + "</td>";
   }
-  output += "</tr><tr>";
+  output += "</tr>";
+
+  // Third row: letters n-z
+  output += "<tr>";
   for (var i = 13; i < 26; i++) {
-    output += "<td bgcolor='white'; style=\"width:20px\"><b>";
-    output += String.fromCharCode(i + charValOfA);
-    output += "</b></td> ";
+    output += "<td><b>" + String.fromCharCode(i + charValOfA) + "</b></td>";
   }
-  output += "</tr><tr>";
+  output += "</tr>";
+
+  // Fourth row: frequencies for n-z
+  output += "<tr>";
   for (var i = 13; i < 26; i++) {
-    output += "<td bgcolor='white'; style=\"width:20px\">";
-    var num = freq[i] / totalChars;
-    output += Math.round(num * 100000) / 1000;
-    if (num == 0) {
-      output += ".000";
+    var num = totalChars > 0 ? freq[i] / totalChars : 0;
+    var percentage = Math.round(num * 100000) / 1000;
+    if (percentage === 0) {
+      percentage = "0.000";
     }
-    output += "</td> ";
+    output += "<td>" + percentage + "</td>";
   }
-  output += "</tr></table>";
+  output += "</tr>";
+
+  output += "</tbody>";
+  output += "</table>";
+  output += "</div>";
+
   document.getElementById("cipherFreq").innerHTML = output;
 }
 
 function Reset() {
-  // Copy current ciphertext to scratchpad
-  document.getElementById("textarea2").value =
-    document.getElementById("textarea").value;
-  // Clear replacement history
-  document.getElementById("replacements").innerHTML = "";
-  // Clear solution fields
-  document.getElementById("textarea3").value = "";
-  document.getElementById("key2").value = "";
-  // Clear notification
-  document.getElementById("notification").value = "";
-  document.getElementById("notification").style.color = "black";
-  // Clear character input fields
-  document.getElementById("char1").value = "";
-  document.getElementById("char2").value = "";
-  document.getElementById("char3").value = "";
-  document.getElementById("char4").value = "";
+  try {
+    // Copy current ciphertext to scratchpad
+    var textarea = document.getElementById("textarea");
+    var textarea2 = document.getElementById("textarea2");
+    if (textarea && textarea2) {
+      textarea2.value = textarea.value;
+    }
+
+    // Clear replacement history
+    var replacements = document.getElementById("replacements");
+    if (replacements) {
+      replacements.innerHTML = "";
+    }
+
+    // Clear solution fields
+    var textarea3 = document.getElementById("textarea3");
+    var key2 = document.getElementById("key2");
+    if (textarea3) textarea3.value = "";
+    if (key2) key2.value = "";
+
+    // Clear notification
+    var notification = document.getElementById("notification");
+    if (notification) {
+      notification.innerHTML = "Feedback will appear here...";
+      notification.style.color = "black";
+      notification.style.backgroundColor = "#f8f9fa";
+      notification.style.border = "1px solid #dee2e6";
+    }
+
+    // Clear character input fields
+    var char1 = document.getElementById("char1");
+    var char2 = document.getElementById("char2");
+    var char3 = document.getElementById("char3");
+    var char4 = document.getElementById("char4");
+    if (char1) char1.value = "";
+    if (char2) char2.value = "";
+    if (char3) char3.value = "";
+    if (char4) char4.value = "";
+  } catch (error) {
+    console.error("Error in Reset function:", error);
+  }
 }
 
 // New function to copy from scratchpad to solution area
@@ -293,8 +381,11 @@ function deriveKeyFromReplacements() {
 function checkAnswer() {
   // Validate that we have a valid cipher loaded
   if (current_cipher < 0 || current_cipher >= solution_plaintext.length) {
-    document.getElementById("notification").value =
-      "Please load a ciphertext first by clicking 'Next Ciphertext'";
+    document.getElementById("notification").innerHTML =
+      "⚠️ Please load a ciphertext first by clicking 'Next Ciphertext'";
+    document.getElementById("notification").style.backgroundColor = "#fff3cd";
+    document.getElementById("notification").style.color = "#856404";
+    document.getElementById("notification").style.border = "1px solid #ffeaa7";
     return;
   }
 
@@ -303,21 +394,31 @@ function checkAnswer() {
 
   // Check if user has entered both plaintext and key
   if (userPlaintext === "") {
-    document.getElementById("notification").value =
-      "Please enter your solution plaintext";
+    document.getElementById("notification").innerHTML =
+      "⚠️ Please enter your solution plaintext";
+    document.getElementById("notification").style.backgroundColor = "#fff3cd";
+    document.getElementById("notification").style.color = "#856404";
+    document.getElementById("notification").style.border = "1px solid #ffeaa7";
     return;
   }
 
   if (userKey === "") {
-    document.getElementById("notification").value =
-      "Please enter your solution key (26 characters)";
+    document.getElementById("notification").innerHTML =
+      "⚠️ Please enter your solution key (26 characters)";
+    document.getElementById("notification").style.backgroundColor = "#fff3cd";
+    document.getElementById("notification").style.color = "#856404";
+    document.getElementById("notification").style.border = "1px solid #ffeaa7";
     return;
   }
 
   // Validate key length
   if (userKey.length !== 26) {
-    document.getElementById("notification").value =
-      "Solution key must be exactly 26 characters long";
+    document.getElementById("notification").innerHTML =
+      "❌ Solution key must be exactly 26 characters long. Current length: " +
+      userKey.length;
+    document.getElementById("notification").style.backgroundColor = "#f8d7da";
+    document.getElementById("notification").style.color = "#721c24";
+    document.getElementById("notification").style.border = "1px solid #f5c6cb";
     return;
   }
 
@@ -328,13 +429,21 @@ function checkAnswer() {
   for (var i = 0; i < 26; i++) {
     var char = alphabet.charAt(i);
     if (keyLower.indexOf(char) === -1) {
-      document.getElementById("notification").value =
-        "Key must contain all letters a-z exactly once. Missing: " + char;
+      document.getElementById("notification").innerHTML =
+        "❌ Key must contain all letters a-z exactly once. Missing: " + char;
+      document.getElementById("notification").style.backgroundColor = "#f8d7da";
+      document.getElementById("notification").style.color = "#721c24";
+      document.getElementById("notification").style.border =
+        "1px solid #f5c6cb";
       return;
     }
     if (uniqueChars.indexOf(keyLower.charAt(i)) !== -1) {
-      document.getElementById("notification").value =
-        "Key contains duplicate letters. Each letter a-z must appear exactly once.";
+      document.getElementById("notification").innerHTML =
+        "❌ Key contains duplicate letters. Each letter a-z must appear exactly once.";
+      document.getElementById("notification").style.backgroundColor = "#f8d7da";
+      document.getElementById("notification").style.color = "#721c24";
+      document.getElementById("notification").style.border =
+        "1px solid #f5c6cb";
       return;
     }
     uniqueChars.push(keyLower.charAt(i));
@@ -348,30 +457,41 @@ function checkAnswer() {
     userPlaintext.toLowerCase() === correctPlaintext &&
     keyLower === correctKey
   ) {
-    document.getElementById("notification").value = "CORRECT!! Well done!";
-    document.getElementById("notification").style.color = "green";
+    document.getElementById("notification").innerHTML =
+      "🎉 CORRECT!! Well done!<br><strong>Plaintext:</strong> " +
+      correctPlaintext +
+      "<br><strong>Key:</strong> " +
+      correctKey;
+    document.getElementById("notification").style.backgroundColor = "#d4edda";
+    document.getElementById("notification").style.color = "#155724";
+    document.getElementById("notification").style.border = "1px solid #c3e6cb";
   } else {
-    var feedback = "Not quite right. ";
+    var feedback = "❌ Not quite right.<br>";
     if (userPlaintext.toLowerCase() !== correctPlaintext) {
-      feedback += "Check your plaintext. ";
+      feedback += "<strong>Plaintext issue:</strong> ";
       // Give specific hints
       var plaintextWords = correctPlaintext.split(" ");
       feedback +=
-        "Hint: The text starts with '" +
+        "The text starts with '" +
         plaintextWords[0] +
         "' and contains " +
         plaintextWords.length +
-        " words. ";
+        " words.<br>";
     }
     if (keyLower !== correctKey) {
-      feedback += "Check your substitution key. ";
+      feedback += "<strong>Key issue:</strong> ";
       // Give frequency hint
       feedback +=
-        "Hint: The most frequent letter in the ciphertext should map to 'e'. ";
+        "The most frequent letter in the ciphertext should map to 'e'.<br>";
     }
     feedback +=
-      "Try using frequency analysis to help identify letter patterns.";
-    document.getElementById("notification").value = feedback;
-    document.getElementById("notification").style.color = "red";
+      "💡 <strong>Tip:</strong> Use frequency analysis to help identify letter patterns.<br>";
+    feedback += "<strong>Expected Output:</strong><br>";
+    feedback += "<strong>Plaintext:</strong> " + correctPlaintext + "<br>";
+    feedback += "<strong>Key:</strong> " + correctKey;
+    document.getElementById("notification").innerHTML = feedback;
+    document.getElementById("notification").style.backgroundColor = "#f8d7da";
+    document.getElementById("notification").style.color = "#721c24";
+    document.getElementById("notification").style.border = "1px solid #f5c6cb";
   }
 }

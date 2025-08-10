@@ -1,39 +1,64 @@
-## Procedure
+This experiment guides you through the process of analyzing and breaking mono-alphabetic substitution ciphers using frequency analysis and pattern recognition techniques.
 
-### Part 1: Manual Letter-by-Letter Substitution
+### Part 1: Ciphertext Analysis
 
-**STEP 1:** Enter the plaintext message you want to encrypt in the provided text field.
+**STEP 1:** Load a ciphertext sample by clicking the **"📝 Next Ciphertext"** button to cycle through different encrypted messages.
 
-**STEP 2:** Define your substitution mapping by entering corresponding cipher letters for each alphabet letter in the substitution table.
+**STEP 2:** Examine the **English Letter Frequencies** reference table provided. Note that 'e' is the most frequent letter (12.702%), followed by 't' (9.056%) and 'a' (8.167%).
 
-**STEP 3:** Click on each letter in your plaintext to manually encrypt it using your defined substitution mapping.
+**STEP 3:** Click **"📊 Calculate Frequencies"** to analyze the letter frequency distribution in the current ciphertext.
 
-**STEP 4:** Observe how the cipher text is built character by character as you click on each letter.
+**STEP 4:** Compare the ciphertext frequencies with standard English letter frequencies to identify potential substitutions. The most frequent letter in the ciphertext likely corresponds to 'e' in the plaintext.
 
-**STEP 5:** Use the "Check" button to verify if your manual encryption is correct.
+### Part 2: Interactive Substitution Workspace
 
-### Part 2: Phrase-Based Substitution
+**STEP 5:** In the **Working Area**, you'll see a copy of the ciphertext that you can modify through substitutions.
 
-**STEP 6:** Enter the plaintext phrase you want to encrypt in the input field.
+**STEP 6:** Use the **Substitution Tools** to replace cipher characters with plaintext letters:
 
-**STEP 7:** Set up your substitution key mapping in the table if not already configured.
+- Enter a cipher character (lowercase) in the first field
+- Enter the corresponding plaintext character (uppercase) in the second field
+- Click **"✓ Apply"** to make the substitution throughout the text
 
-**STEP 8:** Click the "Encrypt" button to automatically encrypt the entire phrase at once.
+**STEP 7:** Monitor your **Replacement History** to track all substitutions you've made.
 
-**STEP 9:** Review the generated ciphertext and analyze the transformation patterns.
+**STEP 8:** Use the **"⟲ Replace"** function to substitute phrases or character sequences if needed.
 
-### Part 3: Decryption Process
+**STEP 9:** Continue making substitutions based on:
 
-**STEP 10:** Enter the ciphertext you want to decrypt in the appropriate field.
+- Frequency analysis results
+- Common English letter patterns (th, er, on, an, etc.)
+- Word structure and context clues
 
-**STEP 11:** Apply the reverse substitution using the same key table to convert ciphertext back to plaintext.
+### Part 3: Solution Verification
 
-**STEP 12:** Verify that the decrypted text matches the original message.
+**STEP 10:** Once you believe you have the correct plaintext, copy your decrypted text to the **"📝 Final Plaintext"** field.
 
-### Part 4: Solution Key Verification
+**STEP 11:** Enter the complete substitution key (26 characters) in the **"🔑 Solution Key"** field, representing the cipher alphabet that maps to the standard alphabet a-z.
 
-**STEP 13:** Use the provided solution key to test encryption and decryption of messages.
+**STEP 12:** Click **"✅ Check Answer"** to verify your solution against the correct answer.
 
-**STEP 14:** Compare results with your manually created substitutions to verify correctness.
+**STEP 13:** Review the feedback provided:
 
-**STEP 15:** Analyze frequency patterns and understand the security implications of substitution ciphers.
+- ✅ Correct solutions will be confirmed with success message
+- ❌ Incorrect solutions will show hints and the expected output for learning
+
+### Part 4: Advanced Analysis
+
+**STEP 14:** Use the **"🔄 Reset Workspace"** button to clear all substitutions and start fresh with the same ciphertext.
+
+**STEP 15:** Try different approaches:
+
+- Start with the most frequent letters
+- Look for common short words (a, an, the, and, etc.)
+- Identify repeated letter patterns
+
+**STEP 16:** Practice with multiple ciphertexts by using **"📝 Next Ciphertext"** to load different encrypted messages and improve your cryptanalysis skills.
+
+### Tips for Success:
+
+- **Frequency Analysis:** Always start by comparing letter frequencies
+- **Pattern Recognition:** Look for common English letter combinations
+- **Systematic Approach:** Keep track of your substitutions and reasoning
+- **Context Clues:** Use partial words to guess missing letters
+- **Verification:** Regularly check if your partial decryption makes sense in English
