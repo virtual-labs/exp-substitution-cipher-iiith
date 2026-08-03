@@ -1,0 +1,6 @@
+- [Substitution Cipher - Wikipedia](https://en.wikipedia.org/wiki/Substitution_cipher)
+- [Introduction to Cryptography and Substitution Ciphers - Khan Academy](https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/intro-to-cryptography)
+- [Classical Cryptography Techniques - GeeksforGeeks](https://www.geeksforgeeks.org/classical-cryptography-techniques/)
+- [Frequency Analysis in Cryptography - Practical Cryptography](http://practicalcryptography.com/cryptanalysis/letter-frequencies-various-languages/english-letter-frequencies/)
+- [Caesar Cipher and Substitution Ciphers - Stanford CS 106B](https://web.stanford.edu/class/cs106b/lectures/10-Encryption/)
+- [Notes on MonoAlphabetic Substitution Cipher](docs/monoalphacipher.pdf)

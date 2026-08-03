@@ -1,0 +1,84 @@
+
+/home/runner/work/exp-substitution-cipher-iiith/exp-substitution-cipher-iiith/experiment/simulation/js/exp2.js
+    7:10  warning  'Mono_Encrypt' is defined but never used               no-unused-vars
+    8:3   warning  'plaintext' is not defined                             no-undef
+    9:3   warning  'key' is not defined                                   no-undef
+   13:7   warning  'plaintext' is not defined                             no-undef
+   17:7   warning  'key' is not defined                                   no-undef
+   20:9   warning  'key' is not defined                                   no-undef
+   27:18  warning  'key' is not defined                                   no-undef
+   36:3   warning  'ciphertext' is not defined                            no-undef
+   38:8   warning  'i' is not defined                                     no-undef
+   38:15  warning  'i' is not defined                                     no-undef
+   38:19  warning  'plaintext' is not defined                             no-undef
+   38:37  warning  'i' is not defined                                     no-undef
+   39:17  warning  'plaintext' is not defined                             no-undef
+   39:34  warning  'i' is not defined                                     no-undef
+   40:7   warning  'ciphertext' is not defined                            no-undef
+   40:21  warning  'key' is not defined                                   no-undef
+   40:32  warning  'plaintext' is not defined                             no-undef
+   40:53  warning  'i' is not defined                                     no-undef
+   41:10  warning  'ciphertext' is not defined                            no-undef
+   41:24  warning  'plaintext' is not defined                             no-undef
+   41:41  warning  'i' is not defined                                     no-undef
+   44:42  warning  'ciphertext' is not defined                            no-undef
+   47:45  warning  'ciphertext' is not defined                            no-undef
+   50:10  warning  'Mono_Decrypt' is defined but never used               no-unused-vars
+   50:23  warning  'f' is defined but never used                          no-unused-vars
+   51:3   warning  'ciphertext' is not defined                            no-undef
+   52:3   warning  'key' is not defined                                   no-undef
+   56:7   warning  'ciphertext' is not defined                            no-undef
+   60:7   warning  'key' is not defined                                   no-undef
+   63:9   warning  'key' is not defined                                   no-undef
+   70:18  warning  'key' is not defined                                   no-undef
+   79:3   warning  'plaintext' is not defined                             no-undef
+   81:8   warning  'i' is not defined                                     no-undef
+   81:15  warning  'i' is not defined                                     no-undef
+   81:19  warning  'ciphertext' is not defined                            no-undef
+   81:38  warning  'i' is not defined                                     no-undef
+   82:17  warning  'ciphertext' is not defined                            no-undef
+   82:35  warning  'i' is not defined                                     no-undef
+   83:7   warning  'plaintext' is not defined                             no-undef
+   83:40  warning  'key' is not defined                                   no-undef
+   83:52  warning  'ciphertext' is not defined                            no-undef
+   83:70  warning  'i' is not defined                                     no-undef
+   84:10  warning  'plaintext' is not defined                             no-undef
+   84:23  warning  'ciphertext' is not defined                            no-undef
+   84:41  warning  'i' is not defined                                     no-undef
+   86:40  warning  'plaintext' is not defined                             no-undef
+   89:10  warning  'Mono_GenRandKey' is defined but never used            no-unused-vars
+   92:3   warning  'ret' is not defined                                   no-undef
+   93:3   warning  'lim' is not defined                                   no-undef
+   94:8   warning  'i' is not defined                                     no-undef
+   94:15  warning  'i' is not defined                                     no-undef
+   94:19  warning  'lim' is not defined                                   no-undef
+   94:24  warning  'i' is not defined                                     no-undef
+   95:5   warning  'index' is not defined                                 no-undef
+   96:5   warning  'ret' is not defined                                   no-undef
+   96:18  warning  'index' is not defined                                 no-undef
+   97:18  warning  'index' is not defined                                 no-undef
+   99:42  warning  'ret' is not defined                                   no-undef
+  144:10  warning  'Next_Mono_Test' is defined but never used             no-unused-vars
+  179:10  warning  'CalculateFreq' is defined but never used              no-unused-vars
+  187:12  warning  'i' is already defined                                 no-redeclare
+  194:12  warning  'i' is already defined                                 no-redeclare
+  205:12  warning  'i' is already defined                                 no-redeclare
+  212:12  warning  'i' is already defined                                 no-redeclare
+  224:12  warning  'i' is already defined                                 no-redeclare
+  231:12  warning  'i' is already defined                                 no-redeclare
+  232:9   warning  'num' is already defined                               no-redeclare
+  233:9   warning  'percentage' is already defined                        no-redeclare
+  248:10  warning  'Reset' is defined but never used                      no-unused-vars
+  293:10  warning  'copyFromScratchpad' is defined but never used         no-unused-vars
+  298:10  warning  'ModifyUserText' is defined but never used             no-unused-vars
+  332:10  warning  'ModifyUserText2' is defined but never used            no-unused-vars
+  358:10  warning  'deriveKeyFromReplacements' is defined but never used  no-unused-vars
+  384:10  warning  'checkAnswer' is defined but never used                no-unused-vars
+
+/home/runner/work/exp-substitution-cipher-iiith/exp-substitution-cipher-iiith/experiment/simulation/js/mobile-detection.js
+  426:7   warning  'mobileDetection' is assigned a value but never used  no-unused-vars
+  429:38  warning  'module' is not defined                               no-undef
+  430:3   warning  'module' is not defined                               no-undef
+
+✖ 77 problems (0 errors, 77 warnings)
+

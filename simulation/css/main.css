@@ -1,0 +1,490 @@
+/* Substitution Cipher Simulation Styles - MAC Style */
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
+  margin: 20px;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  color: #333;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 5px;
+  margin-top: 30px;
+}
+
+h4 {
+  color: #495057;
+  margin-bottom: 10px;
+}
+
+h5 {
+  color: #6c757d;
+  margin-bottom: 8px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 10px 0;
+  width: 100%;
+}
+
+td {
+  padding: 8px;
+  vertical-align: top;
+}
+
+td:first-child {
+  font-weight: bold;
+  min-width: 150px;
+}
+
+textarea {
+  font-family: monospace;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="button"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 2px;
+  transition: background-color 0.2s ease;
+}
+
+input[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+input[type="text"] {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#notification,
+#notification2 {
+  min-height: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px 0;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+}
+
+/* Enhanced button styling */
+.button-group {
+  margin: 10px 0;
+}
+
+.copy-button {
+  background: #17a2b8 !important;
+}
+
+.copy-button:hover {
+  background: #138496 !important;
+}
+
+/* Frequency tables - consistent styling */
+.frequency-table-container {
+  overflow-x: auto;
+  margin: 15px 0;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.frequency-table {
+  width: 100%;
+  min-width: 500px;
+  border-collapse: separate;
+  border-spacing: 1px;
+  font-size: 12px;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.frequency-table td {
+  padding: 8px 4px;
+  text-align: center;
+  border: none;
+  background: white;
+  font-weight: normal;
+}
+
+.frequency-table td b {
+  font-weight: bold;
+}
+
+/* Ciphertext frequency table */
+#cipherFreq table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 1px;
+  background: #000;
+  margin: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#cipherFreq td {
+  padding: 8px 4px;
+  text-align: center;
+  border: none;
+  background: white;
+  font-weight: normal;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    margin: 10px;
+  }
+
+  .content {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  .frequency-table {
+    font-size: 11px;
+  }
+
+  textarea {
+    font-size: 14px;
+  }
+}
+
+/* Part headers for backward compatibility */
+.part-header {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  margin: 20px 0 10px 0;
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Replacement row styling for backward compatibility */
+.replacement-row {
+  margin: 10px 0;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.replacement-row label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.phrase-input {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: monospace;
+  min-width: 100px;
+}
+
+@media (max-width: 768px) {
+  .replacement-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .replacement-row label {
+    margin-bottom: 5px;
+  }
+}
+
+/* Legacy CSS preserved for backward compatibility */
+input[type="text"] {
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#key2 {
+  width: 100%;
+}
+
+/* Button styling - gray color scheme */
+input[type="button"],
+button {
+  padding: 8px 12px;
+  margin: 3px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  background: #f5f5f5;
+  color: #333;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="button"]:hover,
+button:hover {
+  background: #e0e0e0;
+}
+
+/* Special button styling */
+.copy-button {
+  background: #28a745 !important;
+  color: white !important;
+  border: 1px solid #28a745 !important;
+  padding: 8px 12px;
+  margin: 10px 0;
+}
+
+.copy-button:hover {
+  background: #1e7e34 !important;
+}
+
+/* Desktop button layout */
+@media (min-width: 769px) {
+  .button-group {
+    display: inline-block;
+    margin: 10px 0;
+  }
+
+  .button-group input[type="button"] {
+    display: inline-block;
+    width: auto;
+    margin: 3px;
+    min-width: 120px;
+  }
+
+  .copy-button {
+    width: auto;
+    display: inline-block;
+  }
+
+  input[type="button"],
+  button {
+    width: auto;
+    display: inline-block;
+    min-height: auto;
+  }
+}
+
+/* Character replacement inputs */
+.char-input {
+  width: 40px;
+  height: 35px;
+  text-align: center;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+/* Phrase replacement inputs */
+.phrase-input {
+  min-width: 120px;
+  width: auto;
+  height: 35px;
+  text-align: left;
+  font-size: 14px;
+  margin: 0 5px;
+  padding: 5px 8px;
+}
+
+/* Replacement controls */
+.replacement-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 5px;
+}
+
+.replacement-row label {
+  font-weight: bold;
+  min-width: 60px;
+}
+
+/* Desktop replacement controls */
+@media (min-width: 769px) {
+  .replacement-row {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .replacement-row label {
+    flex-shrink: 0;
+  }
+}
+
+/* Replacement history */
+#replacements {
+  width: 100%;
+  max-width: 100%;
+  margin: 10px 0;
+  height: auto;
+  min-height: 60px;
+  max-height: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #f9f9f9;
+  font-family: monospace;
+  font-size: 12px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 769px) {
+  #replacements {
+    max-width: 500px;
+  }
+}
+
+/* Section headers */
+h2,
+.part-header {
+  background: #e9ecef;
+  padding: 10px;
+  margin: 20px 0 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Reduce excessive spacing */
+p {
+  margin: 10px 0;
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 2px solid #dee2e6;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .content {
+    padding: 10px;
+  }
+
+  .frequency-table {
+    font-size: 10px;
+    min-width: 400px;
+  }
+
+  .frequency-table td {
+    padding: 4px 2px;
+  }
+
+  /* Ensure ciphertext frequency table matches */
+  #cipherFreq table {
+    font-size: 10px;
+    min-width: 400px;
+  }
+
+  #cipherFreq td {
+    padding: 4px 2px;
+  }
+
+  textarea {
+    font-size: 13px;
+  }
+
+  /* Mobile buttons - full width */
+  input[type="button"],
+  button {
+    width: 100%;
+    margin: 5px 0;
+    min-height: 44px; /* Touch-friendly size */
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .button-group {
+    display: block;
+  }
+
+  .copy-button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .replacement-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .char-input {
+    width: 60px;
+    margin: 5px auto;
+  }
+
+  .phrase-input {
+    width: 100%;
+    margin: 5px 0;
+    max-width: 300px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .frequency-table {
+    font-size: 9px;
+    min-width: 350px;
+  }
+
+  .frequency-table td {
+    padding: 3px 1px;
+  }
+
+  /* Ensure ciphertext frequency table matches */
+  #cipherFreq table {
+    font-size: 9px;
+    min-width: 350px;
+  }
+
+  #cipherFreq td {
+    padding: 3px 1px;
+  }
+
+  textarea {
+    font-size: 12px;
+  }
+}
