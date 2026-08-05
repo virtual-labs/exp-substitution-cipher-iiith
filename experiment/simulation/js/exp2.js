@@ -18,7 +18,7 @@ function Mono_Encrypt() {
     alert(
       "Key must be 26 characters in length. Current length: " +
         key.length +
-        ". Hint: The key should be a permutation of 'abcdefghijklmnopqrstuvwxyz'"
+        ". Hint: The key should be a permutation of 'abcdefghijklmnopqrstuvwxyz'",
     );
     return;
   }
@@ -28,7 +28,7 @@ function Mono_Encrypt() {
   var uniqueChars = [...new Set(keyChars)];
   if (uniqueChars.length !== 26) {
     alert(
-      "Key contains duplicate characters. Each letter a-z must appear exactly once."
+      "Key contains duplicate characters. Each letter a-z must appear exactly once.",
     );
     return;
   }
@@ -61,7 +61,7 @@ function Mono_Decrypt(f) {
     alert(
       "Key must be 26 characters in length. Current length: " +
         key.length +
-        ". Hint: Use the 'Generate Random Key' button or ensure your key contains all letters a-z exactly once."
+        ". Hint: Use the 'Generate Random Key' button or ensure your key contains all letters a-z exactly once.",
     );
     return;
   }
@@ -71,7 +71,7 @@ function Mono_Decrypt(f) {
   var uniqueChars = [...new Set(keyChars)];
   if (uniqueChars.length !== 26) {
     alert(
-      "Key contains duplicate characters. Each letter a-z must appear exactly once."
+      "Key contains duplicate characters. Each letter a-z must appear exactly once.",
     );
     return;
   }
@@ -293,27 +293,30 @@ function Reset() {
 function copyFromScratchpad() {
   var scratchpadText = document.getElementById("textarea2").value;
   document.getElementById("textarea3").value = scratchpadText;
-
-  // Try to derive the key from the replacements made
-  var key = deriveKeyFromReplacements();
-  if (key.length === 26) {
-    document.getElementById("key2").value = key;
-  }
 }
 
 function ModifyUserText() {
   var userText = document.getElementById("textarea2").value;
-  var initText = document.getElementById("char1").value.toLowerCase();
-  var finalText = document.getElementById("char2").value.toUpperCase();
+  var initRaw = document.getElementById("char1").value.trim();
+  var finalRaw = document.getElementById("char2").value.trim();
 
-  if (initText === "" || finalText === "") {
+  if (initRaw === "" || finalRaw === "") {
     alert("Please enter both cipher text and plaintext");
     return;
   }
 
-  // Replace all occurrences of the cipher text with plaintext
+  // Accept case-insensitive user input, but enforce single alphabet letters.
+  if (!/^[a-zA-Z]$/.test(initRaw) || !/^[a-zA-Z]$/.test(finalRaw)) {
+    alert("Please enter exactly one alphabet character in each field");
+    return;
+  }
+
+  var initText = initRaw.toLowerCase();
+  var finalText = finalRaw.toUpperCase();
+
+  // Replace only unresolved lowercase ciphertext, never solved uppercase text.
   var output = userText;
-  var regex = new RegExp(initText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+  var regex = new RegExp(initText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g");
   output = output.replace(regex, finalText);
 
   var replacement_notification =
